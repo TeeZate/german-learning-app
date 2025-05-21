@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography, Grid, Box, Button } from "@mui/material";
+import { Container, Typography, Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { MotionDiv, staggerContainer, slideUp } from "../utils/animations";
 import LessonCard from "../components/LessonCard";
@@ -80,13 +80,26 @@ const Home = () => {
           </Typography>
         </MotionDiv>
 
-        <Grid container spacing={4} sx={{ mt: 2 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 2, // spacing between cards
+            mt: 2,
+          }}
+        >
           {lessons.map((lesson) => (
-            <Grid item xs={12} sm={6} md={4} key={lesson.id}>
+            <Box
+              key={lesson.id}
+              sx={{
+                flex: '1 1 calc(25% - 16px)', // 4 cards per row with gap
+                boxSizing: 'border-box',
+              }}
+            >
               <LessonCard lesson={lesson} />
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </Container>
 
       <Box sx={{ bgcolor: 'background.paper', py: 6, mt: 8 }}>
