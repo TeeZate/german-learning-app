@@ -84,8 +84,9 @@ const Home = () => {
           sx={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: 2, // spacing between cards
+            gap: 2,
             mt: 2,
+            justifyContent: 'center', // Optional: centers the cards
           }}
         >
           {lessons.map((lesson) => (

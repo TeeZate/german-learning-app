@@ -456,36 +456,48 @@ const LessonsRepository = () => {
             initial="hidden"
             animate="visible"
           >
-            <Grid container spacing={3}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 3, // spacing between cards
+                mt: 2,
+              }}
+            >
               {currentLessons.map((lesson) => (
-                <Grid item xs={12} sm={6} md={4} key={lesson.id}>
-                  <MotionDiv variants={slideUp}>
-                    <Box sx={{ position: 'relative' }}>
-                      <LessonCard lesson={lesson} />
-                      <IconButton
-                        onClick={() => toggleBookmark(lesson.id)}
-                        sx={{
-                          position: 'absolute',
-                          top: 8,
-                          right: 8,
+                <MotionDiv
+                  key={lesson.id}
+                  variants={slideUp}
+                  style={{
+                    flex: '1 1 calc(25% - 24px)', // 4 per row with 24px gap (gap=3)
+                    boxSizing: 'border-box',
+                  }}
+                >
+                  <Box sx={{ position: 'relative' }}>
+                    <LessonCard lesson={lesson} />
+                    <IconButton
+                      onClick={() => toggleBookmark(lesson.id)}
+                      sx={{
+                        position: 'absolute',
+                        top: 8,
+                        right: 8,
+                        bgcolor: 'background.paper',
+                        '&:hover': {
                           bgcolor: 'background.paper',
-                          '&:hover': {
-                            bgcolor: 'background.paper',
-                          },
-                          zIndex: 1,
-                        }}
-                      >
-                        {bookmarkedLessons.includes(lesson.id) ? (
-                          <BookmarkIcon color="primary" />
-                        ) : (
-                          <BookmarkBorderIcon />
-                        )}
-                      </IconButton>
-                    </Box>
-                  </MotionDiv>
-                </Grid>
+                        },
+                        zIndex: 1,
+                      }}
+                    >
+                      {bookmarkedLessons.includes(lesson.id) ? (
+                        <BookmarkIcon color="primary" />
+                      ) : (
+                        <BookmarkBorderIcon />
+                      )}
+                    </IconButton>
+                  </Box>
+                </MotionDiv>
               ))}
-            </Grid>
+            </Box>
           </MotionDiv>
         ) : (
           <Paper sx={{ p: 4, textAlign: 'center' }}>
